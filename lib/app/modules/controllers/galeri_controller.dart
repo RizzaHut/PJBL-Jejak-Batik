@@ -15,14 +15,6 @@ class GaleriController extends GetxController {
   final RxBool isLoading = true.obs;
   final RxString searchQuery = ''.obs;
 
-  static const Map<String, String> _docIdToRoute = {
-    'btk1': Routes.hasilKawung,
-    'btk2': Routes.hasilParang,
-    'btk3': Routes.hasilMegaMendung,
-    'btk4': Routes.hasilSekarJagad,
-    'btk5': Routes.hasilSogan,
-  };
-
   @override
   void onInit() {
     super.onInit();
@@ -72,7 +64,8 @@ class GaleriController extends GetxController {
               daerah: bd['daerah'] as String? ?? '',
               deskripsi: _getFirstDeskripsi(bd),
               imagePath: bd['imagePath'] as String? ?? '',
-              route: _docIdToRoute[batikId] ?? Routes.hasilKawung,
+              route:
+                  RiwayatScanItem.docIdToRoute[batikId] ?? Routes.hasilKawung,
               scannedAt: scannedAt,
             ),
           );
