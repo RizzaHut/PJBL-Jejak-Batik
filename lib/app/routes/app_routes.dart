@@ -1,0 +1,31 @@
+abstract class Routes {
+  static const home = '/home';
+  static const splash = '/splash';
+  static const welcome = '/welcome';
+  static const register = '/register';
+  static const login = '/login';
+  static const scan = '/scan';
+  static const galeri = '/galeri';
+  static const profil = '/profil';
+  static const pengaturan = '/pengaturan';
+  static const bantuan = '/bantuan';
+  static const tentang = '/tentang';
+  static const editProfil = '/editProfil';
+  static const hasilKawung = '/hasil-kawung';
+  static const hasilParang = '/hasil-parang';
+  static const hasilMegaMendung = '/hasil-megamendung';
+  static const hasilSogan = '/hasil-sogan';
+  static const hasilSekarJagad = '/hasil-sekarjagad';
+  static const hasilBali = '/hasil-bali';
+  static const hasilBetawi = '/hasil-betawi';
+  static const hasilCelup = '/hasil-celup';
+  static const hasilCendrawasih = '/hasil-cendrawasih';
+  static const hasilCeplok = '/hasil-ceplok';
+  static const hasilCiamis = '/hasil-ciamis';
+  static const hasilGarutan = '/hasil-garutan';
+  static const hasilGentongan = '/hasil-gentongan';
+  static const hasilKeraton = '/hasil-keraton';
+  static const hasilLasem = '/hasil-lasem';
+  static const hasilPekalongan = '/hasil-pekalongan';
+  static const hasilPriangan = '/hasil-priangan';
+}
