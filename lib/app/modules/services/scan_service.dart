@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 
 class RoboflowResult {
-  final String label;      
+  final String label;
   final double confidence;
   final bool terdeteksi;
 
@@ -16,7 +17,6 @@ class RoboflowResult {
 }
 
 class ScanService {
-  static const String _apiKey = 'VycL1nf0RwhI2mPyMy0i';
   static const String _workspaceId = 'rizzas-workspace';
   static const String _workflowId = 'detect-and-classify-2';
 
@@ -26,12 +26,17 @@ class ScanService {
   static const double _threshold = 0.2;
 
   Future<RoboflowResult> classifyImage(String imagePath) async {
+    final apiKey = dotenv.env['ROBOFLOW_API_KEY'];
+    if (apiKey == null || apiKey.isEmpty) {
+      throw StateError('Missing ROBOFLOW_API_KEY in .env');
+    }
+
     try {
       final bytes = await File(imagePath).readAsBytes();
       final base64Image = base64Encode(bytes);
 
       final requestBody = jsonEncode({
-        'api_key': _apiKey,
+        'api_key': apiKey,
         'inputs': {
           'image': {'type': 'base64', 'value': base64Image},
         },

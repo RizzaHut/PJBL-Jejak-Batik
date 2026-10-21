@@ -3,6 +3,7 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
 ///
@@ -15,6 +16,14 @@ import 'package:flutter/foundation.dart'
 /// );
 /// ```
 class DefaultFirebaseOptions {
+  static String _requiredEnv(String key) {
+    final value = dotenv.env[key];
+    if (value == null || value.trim().isEmpty) {
+      throw StateError('Missing $key in .env');
+    }
+    return value;
+  }
+
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
@@ -40,8 +49,8 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDF4mFQcUQRVcTyPRdUtJ8_mgdfDE3shGM',
+  static FirebaseOptions get web => FirebaseOptions(
+    apiKey: _requiredEnv('FIREBASE_API_KEY_WEB'),
     appId: '1:5494400316:web:58cb8f998edae1ad04aa39',
     messagingSenderId: '5494400316',
     projectId: 'jejak-batik-3b408',
@@ -50,16 +59,16 @@ class DefaultFirebaseOptions {
     measurementId: 'G-PEK7LPEWWV',
   );
 
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCDS93en5c8LFK4geFCuk1zvogTyTQVvoI',
+  static FirebaseOptions get android => FirebaseOptions(
+    apiKey: _requiredEnv('FIREBASE_API_KEY_ANDROID'),
     appId: '1:5494400316:android:92c8047af21f084f04aa39',
     messagingSenderId: '5494400316',
     projectId: 'jejak-batik-3b408',
     storageBucket: 'jejak-batik-3b408.firebasestorage.app',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCZGDYD5n7puzhiDgplNyLfIV3U9GjG0OM',
+  static FirebaseOptions get ios => FirebaseOptions(
+    apiKey: _requiredEnv('FIREBASE_API_KEY_IOS'),
     appId: '1:5494400316:ios:2d43c6f7db1b9f7b04aa39',
     messagingSenderId: '5494400316',
     projectId: 'jejak-batik-3b408',
@@ -67,8 +76,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.jejakBatik',
   );
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyCZGDYD5n7puzhiDgplNyLfIV3U9GjG0OM',
+  static FirebaseOptions get macos => FirebaseOptions(
+    apiKey: _requiredEnv('FIREBASE_API_KEY_MACOS'),
     appId: '1:5494400316:ios:2d43c6f7db1b9f7b04aa39',
     messagingSenderId: '5494400316',
     projectId: 'jejak-batik-3b408',
@@ -76,8 +85,8 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.jejakBatik',
   );
 
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyDF4mFQcUQRVcTyPRdUtJ8_mgdfDE3shGM',
+  static FirebaseOptions get windows => FirebaseOptions(
+    apiKey: _requiredEnv('FIREBASE_API_KEY_WINDOWS'),
     appId: '1:5494400316:web:626ccd427937659804aa39',
     messagingSenderId: '5494400316',
     projectId: 'jejak-batik-3b408',
